@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { View, Text } from 'react-native';
-import React from 'react';
-import { ButtonComponent } from '../../components';
+import React, { useState } from 'react';
+import { InputComponent } from '../../components';
 import { globalStyles } from '../../styles/globalStyles';
 
 const LoginScreen = () => {
+    const [email, setEmail] = useState('')
     return (
-        <View >
-            <Text>LoginScreen</Text>
-            <ButtonComponent type='link' text='LOGIN' icon={<View><Text>N</Text></View>}/>
+        <View style={[globalStyles.container, {justifyContent: 'center', alignItems: 'center'}]}>
+            <InputComponent placeholder='Email' value={email} onChange={(val)=> setEmail(val)} />
         </View>
     );
 };
