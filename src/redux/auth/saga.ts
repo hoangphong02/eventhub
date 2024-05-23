@@ -6,12 +6,15 @@ import {
   signupSuccess,
   signupFailure,
 } from "./actions";
-import { LOGIN_REQUEST, SIGNUP_REQUEST } from "./actionType";
+import { LOGIN_REQUEST, SIGNUP_REQUEST } from "./actionTypes";
 
 import { IAuth } from "./types";
+import { axiosClient } from "../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { STORAGE_KEY } from "../../constants/storageKey";
 const login = async (payload: { email: string; password: string }) => {
-  const { data } = await axios.post<IAuth>(
-    "https://reqres.in/api/login",
+  const { data } = await axiosClient.post<IAuth>(
+    '/clients/web/login',
     { email: payload.email, password: payload.password },
     {
       headers: {
@@ -24,17 +27,32 @@ const login = async (payload: { email: string; password: string }) => {
 };
 function* loginSaga(action: any) {
   try {
-    const response: { token: string } = yield call(login, {
+    const response: { token_type: string,
+      access_token: string,
+      refresh_token: string,
+      expires_in: string, 
+       } = yield call(login, {
       email: action.payload.values.email,
       password: action.payload.values.password,
     });
-
+    const {
+      token_type: tokenType,
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      expires_in: expiresIn,
+    } = response;
+    AsyncStorage.setItem(
+      STORAGE_KEY.ACCESS_TOKEN,
+      `${tokenType} ${accessToken}`,
+    );
+    AsyncStorage.setItem(STORAGE_KEY.REFRESH_TOKEN, refreshToken);
+    AsyncStorage.setItem(STORAGE_KEY.EXPIRES_IN, expiresIn);
     yield put(
       loginSuccess({
-        token: response.token,
+        token: response.access_token,
       })
     );
-    action.payload.callback(response.token);
+    action.payload.callback(response.token_type);
   } catch (e: any) {
     yield put(
       loginFailure({
@@ -43,37 +61,6 @@ function* loginSaga(action: any) {
     );
   }
 }
-
-// function* loginRequest( payload: Props ) {
-//   try {
-//     const response = yield call(() =>
-//       axiosMicro.post('/clients/web/login', payload),
-//     );
-//     const {
-//       token_type: tokenType,
-//       access_token: accessToken,
-//       refresh_token: refreshToken,
-//       expires_in: expiresIn,
-//     } = response.data;
-//     AsyncStorage.setItem(
-//       STORAGE_KEY.ACCESS_TOKEN,
-//       `${tokenType} ${accessToken}`,
-//     );
-//     AsyncStorage.setItem(STORAGE_KEY.REFRESH_TOKEN, refreshToken);
-//     AsyncStorage.setItem(STORAGE_KEY.EXPIRES_IN, expiresIn);
-//     AsyncStorage.setItem(STORAGE_KEY.IS_LOGIN, true);
-//     yield put(Actions.loginSuccess(response.data));
-//   } catch (e) {
-//     if (e?.response?.data) {
-//       const messages = e.response.data;
-//       yield put(Actions.loginFailure(messages));
-//     }
-//   }
-// }
-
-
-
-
 
 // eslint-disable-next-line func-names
 export default function* () {

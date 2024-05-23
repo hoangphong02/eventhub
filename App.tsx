@@ -4,7 +4,8 @@ import { SplashScreen } from './src/screens';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from './src/navigators/AuthNavigator';
 import { StatusBar } from 'react-native';
-
+import {Provider} from 'react-redux'
+import {store} from './src/redux/storeConfig/store';
 const App = () => {
   const [isShowSplash, setIsShowSplash] = useState(true);
   useEffect(() => {
@@ -15,6 +16,7 @@ const App = () => {
   }, []);
   return (
     <>
+    <Provider store={store}>
       <StatusBar barStyle="dark-content"
         backgroundColor="transparent"
         translucent />
@@ -26,6 +28,7 @@ const App = () => {
           </NavigationContainer>
         )
       }
+    </Provider>
     </>
   )
 };

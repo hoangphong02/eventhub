@@ -5,7 +5,7 @@ import {
     SIGNUP_REQUEST,
     SIGNUP_FAILURE,
     SIGNUP_SUCCESS,
-} from "./actionType";
+} from "./actionTypes";
 import {
     LoginPayload,
     SignupPayload,

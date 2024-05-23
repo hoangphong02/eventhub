@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { InputComponent, SectionComponent, ContainerComponent, ButtonComponent, TextComponent } from '../../components';
 import { globalStyles } from '../../styles/globalStyles';
-import { PasswordCheck, Sms } from 'iconsax-react-native';
+import { Call, Key, Sms, User } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
 import { Validate } from '../../utils/validate';
 
@@ -32,31 +32,31 @@ const RegisterScreen = ({ navigation }: any) => {
                 styles={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop: 75,
+                    // marginTop: 75,
                 }}>
                 <Image
-                    source={require('../../assets/images/logo-with-text.png')}
+                    source={require('../../assets/images/thuocsi.png')}
                     style={{
                         resizeMode: 'contain',
                         height: 50,
-                        marginBottom: 30,
+                        marginBottom: 10,
                     }}
                 />
             </SectionComponent>
             <SectionComponent styles={[globalStyles.container, styles.container]}>
-                <InputComponent placeholder='Name' value={name} onChange={(val) => setName(val)} allowClear affix={<Sms size={22} color={appColors.gray} />} />
-                <InputComponent placeholder='Email' type='email-address' value={email} onChange={(val) => setEmail(val)} allowClear affix={<Sms size={22} color={appColors.gray} />} />
-                <InputComponent placeholder='Phone' value={phone} onChange={(val) => setPhone(val)} allowClear affix={<Sms size={22} color={appColors.gray} />} />
-                <InputComponent placeholder='Password' value={password} onChange={(val) => setPassword(val)} isPassword affix={<PasswordCheck size={22} color={appColors.gray} />} />
-                <InputComponent placeholder='ConfirmPassword' value={confirmPassword} onChange={(val) => setConfirmPassword(val)} isPassword affix={<PasswordCheck size={22} color={appColors.gray} />} />
+                <InputComponent placeholder='Tên' value={name} onChange={(val) => setName(val)} allowClear affix={<User size={20} color={appColors.text} />} />
+                <InputComponent placeholder='Email' type='email-address' value={email} onChange={(val) => setEmail(val)} allowClear affix={<Sms size={20} color={appColors.text} />} />
+                <InputComponent placeholder='Số điện thoại' value={phone} onChange={(val) => setPhone(val)} allowClear affix={<Call size={20} color={appColors.text} />} />
+                <InputComponent placeholder='Mật khẩu' value={password} onChange={(val) => setPassword(val)} isPassword affix={<Key size={20} color={appColors.text} />} />
+                <InputComponent placeholder='Mật khẩu xác nhận' value={confirmPassword} onChange={(val) => setConfirmPassword(val)} isPassword affix={<Key size={20} color={appColors.text} />} />
 
             </SectionComponent>
             <SectionComponent >
-                <ButtonComponent text='SIGN UP' type='primary' disabled={isDisabled} />
+                <ButtonComponent text='Đăng ký' type='primary' disabled={isDisabled} />
             </SectionComponent>
             <SectionComponent styles={styles.register}>
-                <TextComponent text='Bạn đã có tài khoản?' />
-                <ButtonComponent text='Đăng nhập' type='link' onPress={() => navigation.navigate('LoginScreen')} />
+                <TextComponent text='Bạn đã có tài khoản? ' />
+                <ButtonComponent text='Đăng nhập ngay' type='link' onPress={() => navigation.navigate('LoginScreen')} />
             </SectionComponent>
         </ContainerComponent>
     );

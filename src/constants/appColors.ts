@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 export const appColors = {
-    primary: 'rgb(255, 145, 15)',
+    primary: '#08ac60',
     white: '#ffffff',
     white2: '#fcfcfc',
     text: '#120D26',
@@ -9,6 +9,6 @@ export const appColors = {
     gray3: '#E4DFDF',
     gray4: '#9d9898',
     gray5: '#d9d9d9',
-    link: 'rgb(255, 145, 15)',
+    link: '#08ac60',
     danger: '#e74c3c',
 };

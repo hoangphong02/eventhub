@@ -18,7 +18,8 @@ const store = createStore(
   {},
   applyMiddleware(...middleware),
 );
-
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 sagaMiddleware.run(rootSaga);
 
 export { store };

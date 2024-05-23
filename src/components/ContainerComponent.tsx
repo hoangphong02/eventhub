@@ -21,7 +21,7 @@ const ContainerComponent = (props: Props) => {
     const navigation : any = useNavigation();
     const headerComponent = ()=>{
         return (
-            <View style={{flex: 1, paddingTop: 30}}>
+            <View style ={{flex: 1, paddingTop: 30}}>
                 {(title || back) && (
                     <RowComponent
                     styles={{
@@ -29,7 +29,7 @@ const ContainerComponent = (props: Props) => {
                         paddingVertical:10,
                         minWidth: 48,
                         minHeight: 48,
-                        justifyContent: 'center'
+                        justifyContent: 'center',
                     }}
                     >
                         {

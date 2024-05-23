@@ -5,7 +5,7 @@ import {
     SIGNUP_REQUEST,
     SIGNUP_SUCCESS,
     SIGNUP_FAILURE,
-} from "./actionType";
+} from "./actionTypes";
 export interface IAuth {
     token: string;
 }

@@ -13,17 +13,17 @@ export const globalStyles = StyleSheet.create({
         color: appColors.text
     },
     buttons: {
-        borderRadius: 12,
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems:'center',
         backgroundColor: appColors.white,
-        paddingHorizontal: 16,
-        paddingVertical:16,
-        minHeight: 56,
+        paddingHorizontal: 10,
+        paddingVertical:10,
+        minHeight: 40,
         flexDirection:'row'
     },
     section: {
-        paddingHorizontal: 16,
+        paddingHorizontal: 20,
         paddingBottom: 20 
     },
     row: {
