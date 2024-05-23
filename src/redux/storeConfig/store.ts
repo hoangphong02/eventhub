@@ -1,26 +1,29 @@
-import { applyMiddleware, createStore } from 'redux';
+import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
+// import { connectRouter, routerMiddleware } from 'connected-react-router';
+import authReducer from '../auth/authSlice';
 import createSagaMiddleware from 'redux-saga';
-
-import rootReducer from '../rootReducer';
+import { history } from '../../utils/history';
 import rootSaga from '../rootSaga';
 
-// create the saga middleware
+const rootReducer = combineReducers({
+  // router: connectRouter(history),
+  auth: authReducer,
+});
+
 const sagaMiddleware = createSagaMiddleware();
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware),
+});
 
-// ** init middleware
-const middleware = [sagaMiddleware];
-
-// ** Dev Tools
-
-// ** Create store
-const store = createStore(
-  rootReducer,
-  {},
-  applyMiddleware(...middleware),
-);
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
 sagaMiddleware.run(rootSaga);
 
-export { store };
-
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
