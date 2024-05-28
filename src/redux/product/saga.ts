@@ -5,9 +5,9 @@ import { ProductActionType } from './type';
 import { IAction } from './actions';
 
 /*function generator implementations of Saga */
-function* getAllProduct() {
+function* getAllProduct({ payload: id }: IAction) {
     try {
-        const { data } = yield call(getAllProducts); // saga
+        const { data } = yield call(getAllProducts, id); // saga
         yield put({ type: ProductActionType.GET_ALL_PRODUCT_SUCCESS, payload: data });
     } catch (e) {
         yield put({
@@ -70,7 +70,7 @@ function* watchUpdatingProduct() {
 }
 
 /* Saga sends all the watchers to the sagaMiddleware to run. */
-export function* todoSaga() {
+export function* productSaga() {
     yield all([
         watchGetAllProducts(),
         watchRemovingProduct(),

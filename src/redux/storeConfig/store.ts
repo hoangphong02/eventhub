@@ -1,29 +1,37 @@
-import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
-// import { connectRouter, routerMiddleware } from 'connected-react-router';
-import authReducer from '../auth/authSlice';
+import {
+  combineReducers,
+  createStore,
+  applyMiddleware,
+  compose,
+  Store,
+} from 'redux';
+import { productReducer } from '../product/reducer';
+import { voucherReducer } from '../voucher/reducer';
 import createSagaMiddleware from 'redux-saga';
-import { history } from '../../utils/history';
+import { ProductState } from '../product/type';
+import { VoucherState } from '../voucher/type';
 import rootSaga from '../rootSaga';
+import rootReducer from '../rootReducer';
 
-const rootReducer = combineReducers({
-  // router: connectRouter(history),
-  auth: authReducer,
-});
+export interface IApplicationState {
+  productReducer: ProductState;
+  voucherReducer: VoucherState;
+}
 
+// const rootReducer = combineReducers<IApplicationState>({
+//   productReducer: productReducer,
+//   voucherReducer: voucherReducer,
+// });
+
+// @ts-ignore
+const withDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
-});
+const middleware = [sagaMiddleware]; // side-effect middleware
+const store: Store<IApplicationState, any> = createStore(
+  rootReducer,
+  withDevTools(applyMiddleware(...middleware)),
+);
 
 sagaMiddleware.run(rootSaga);
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+export default store;

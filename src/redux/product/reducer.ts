@@ -1,5 +1,4 @@
 import { ProductState, ProductActionType } from './type';
-import { Action } from "redux";
 
 const initialState: ProductState = {
     products: [{
@@ -17,12 +16,14 @@ const initialState: ProductState = {
     isLoading: false,
     error: '',
 };
-
-interface IAction extends Action {
-    readonly payload?: any
+interface IAction {
+    type: string;
+    payload: any;
 }
-
-export const productReducer = (state = initialState, action: IAction) => {
+export const productReducer = (
+    state: ProductState = initialState,
+    action: IAction,
+): ProductState => {
     switch (action.type) {
         case ProductActionType.GET_ALL_PRODUCT_REQUEST:
             return { ...state, isLoading: true };
@@ -50,11 +51,11 @@ export const productReducer = (state = initialState, action: IAction) => {
                 ...state,
                 isLoading: true,
             };
-        case ProductActionType.GET_ALL_PRODUCT_SUCCESS:
+        case ProductActionType.ADD_PRODUCT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
-                foods: [...state.products, action.payload],
+                products: [...state.products, action.payload],
             };
         case ProductActionType.ADD_PRODUCT_FAILURE:
             return {

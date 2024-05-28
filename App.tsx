@@ -5,9 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from './src/navigators/AuthNavigator';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux'
-import { store } from './src/redux/storeConfig/store';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from './src/utils/history';
+import store from './src/redux/storeConfig/store';
 import AppRouters from './src/navigators/AppRouters';
 const App = () => {
   return (
@@ -17,7 +15,7 @@ const App = () => {
         <StatusBar barStyle="dark-content"
           backgroundColor="transparent"
           translucent />
-       <NavigationContainer>
+        <NavigationContainer>
           <AppRouters />
         </NavigationContainer>
         {/* </ConnectedRouter> */}

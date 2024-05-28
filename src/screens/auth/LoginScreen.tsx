@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { View, Text, StyleSheet, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { InputComponent, SectionComponent, ContainerComponent, ButtonComponent, TextComponent } from '../../components';
@@ -6,14 +5,11 @@ import { globalStyles } from '../../styles/globalStyles';
 import { Edit, Key } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
 import { Validate } from '../../utils/validate';
-import { useAppDispatch } from '../../redux/storeConfig/hooks';
-import { authActions } from '../../redux/auth/authSlice';
 
 const LoginScreen = ({ navigation }: any) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isDisabled, setIsDisabled] = useState(true)
-    const dispatch = useAppDispatch()
 
     useEffect(() => {
         const emailValidatetion = Validate.email(email)
@@ -26,10 +22,7 @@ const LoginScreen = ({ navigation }: any) => {
     }, [email, password])
 
     const handleLogin = () => {
-        const payload = {
-            email, password
-        }
-        dispatch(authActions.login(payload))
+        console.log(email, password)
     }
 
     return (
