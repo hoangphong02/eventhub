@@ -47,12 +47,14 @@
 
 // export { axiosClient };
 import axios from 'axios';
-import queryString from 'query-string';
+// import queryString from 'query-string';
 import { configMicro } from './serverMicro';
 
 const axiosClient = axios.create({
-  baseURL: configMicro.API_URL,
-  paramsSerializer: params => queryString.stringify(params),
+  baseURL: 'https://point-api.satek.vn/v1',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 axiosClient.interceptors.request.use(async (config: any) => {

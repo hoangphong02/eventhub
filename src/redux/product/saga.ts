@@ -8,6 +8,7 @@ import { IAction } from './actions';
 function* getAllProduct({ payload: id }: IAction) {
     try {
         const { data } = yield call(getAllProducts, id); // saga
+        console.log('data', data)
         yield put({ type: ProductActionType.GET_ALL_PRODUCT_SUCCESS, payload: data });
     } catch (e) {
         yield put({

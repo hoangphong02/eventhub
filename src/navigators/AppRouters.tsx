@@ -4,12 +4,10 @@ import { SplashScreen } from '../screens';
 import MainNavigator from './MainNavigator';
 import AuthNavigator from './AuthNavigator';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import { useAppSelector } from '../redux/storeConfig/hooks';
-import authReducer from '../redux/auth/authSlice';
 import VoucherNavigator from './VoucherNavigator';
 
 const AppRouters = () => {
-    const [isShowSplash, setIsShowSplash] = useState(true);
+  const [isShowSplash, setIsShowSplash] = useState(true);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsShowSplash(false);
@@ -21,7 +19,7 @@ const AppRouters = () => {
       {isShowSplash ? (
         <SplashScreen />
       ) : (
-        <MainNavigator/>
+        <MainNavigator />
       )}
     </>
   )
