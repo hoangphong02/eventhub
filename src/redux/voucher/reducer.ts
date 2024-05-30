@@ -5,13 +5,13 @@ const initialState: VoucherState = {
         id: '',
         name: '',
         image: '',
-        discount: ''
+        is_point_voucher: false
     }],
     voucher: {
         id: '',
         name: '',
         image: '',
-        discount: ''
+        is_point_voucher: false
     },
     isLoading: false,
     error: '',

@@ -4,25 +4,31 @@ import { InputComponent, SectionComponent, ContainerComponent, ButtonComponent, 
 import { globalStyles } from '../../styles/globalStyles';
 import { Edit, Key } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
-import { Validate } from '../../utils/validate';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/auth/actions';
 
 const LoginScreen = ({ navigation }: any) => {
-    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [isDisabled, setIsDisabled] = useState(true)
+    const dispatch: Dispatch = useDispatch()
 
     useEffect(() => {
-        const emailValidatetion = Validate.email(email)
-        if (!email || !password || !emailValidatetion) {
+        if (!phone || !password) {
             setIsDisabled(true)
         } else {
             setIsDisabled(false)
         }
 
-    }, [email, password])
+    }, [phone, password])
 
     const handleLogin = () => {
-        console.log(email, password)
+        const payload = {
+            phone, password
+        }
+        console.log('payload', payload)
+        dispatch(login(payload))
     }
 
     return (
@@ -51,14 +57,14 @@ const LoginScreen = ({ navigation }: any) => {
                     }} />
                 </SectionComponent>
                 <SectionComponent styles={[globalStyles.container, styles.container]}>
-                    <InputComponent placeholder='Nhập số điện thoại hoặc email' type='email-address' value={email} onChange={(val) => setEmail(val)} allowClear affix={<Edit size={20} color={appColors.text} />} />
+                    <InputComponent placeholder='Nhập số điện thoại hoặc email' type='email-address' value={phone} onChange={(val) => setPhone(val)} allowClear affix={<Edit size={20} color={appColors.text} />} />
                     <InputComponent placeholder='Nhập mật khẩu' value={password} onChange={(val) => setPassword(val)} isPassword affix={<Key size={20} color={appColors.text} />} />
                 </SectionComponent>
                 <SectionComponent styles={{ flex: 1, justifyContent: 'flex-end', flexDirection: 'row' }} >
                     <ButtonComponent text='Quên mật khẩu?' type='link' disabled={isDisabled} styles={{ flex: 1, flexDirection: 'row', alignSelf: 'flex-end' }} />
                 </SectionComponent>
                 <SectionComponent >
-                    <ButtonComponent text='Đăng nhập' type='primary' disabled={isDisabled} onPress={() => handleLogin()} />
+                    <ButtonComponent text='Đăng nhập' type='primary' disabled={isDisabled} onPress={handleLogin} />
                     <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, paddingTop: 20 }}>
                         <Text>Phiên bản 2.0.57</Text>
                     </View>

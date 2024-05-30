@@ -11,7 +11,7 @@ export interface VoucherModel extends ApiResponse {
     id: string;
     name: string;
     image: string;
-    discount: string
+    is_point_voucher: boolean
 }
 
 /* action types */

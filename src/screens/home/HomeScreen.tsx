@@ -13,7 +13,6 @@ const HomeScreen = () => {
     useEffect(() => {
         dispatch(getProducts(6));
     }, []);
-    console.log('products', products)
     return (
         <View>
             <FlatList

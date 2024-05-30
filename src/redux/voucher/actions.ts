@@ -8,8 +8,9 @@ export interface IAction extends Action {
 
 /* action creators */
 
-export const getProducts = (): IAction => ({
+export const getVouchers = (id: string): IAction => ({
     type: VoucherActionType.GET_ALL_VOUCHER_REQUEST,
+    payload: id
 });
 
 

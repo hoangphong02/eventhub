@@ -5,9 +5,9 @@ import { VoucherActionType } from './type';
 import { IAction } from './actions';
 
 /*function generator implementations of Saga */
-function* getAllVoucher() {
+function* getAllVoucher({ payload: id }: IAction) {
     try {
-        const { data } = yield call(getAllVouchers); // saga
+        const { data } = yield call(getAllVouchers, id); // saga
         yield put({ type: VoucherActionType.GET_ALL_VOUCHER_SUCCESS, payload: data });
     } catch (e) {
         yield put({
