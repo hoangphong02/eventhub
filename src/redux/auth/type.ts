@@ -7,16 +7,19 @@ export interface AuthState {
 export type ApiResponse = Record<string, any>;
 
 export interface AuthModel extends ApiResponse {
-    id: string;
-    name: string;
-    avatar: string;
-    email: string;
-    username: string
+    access_token: string;
+    expires_in: Number;
+    refresh_token: string;
+    token_type: string;
 }
 
 export interface LoginPayload {
     phone: string,
     password: string
+}
+export interface IAuth {
+    accessToken: string;
+    refreshToken: string;
 }
 
 /* action types */

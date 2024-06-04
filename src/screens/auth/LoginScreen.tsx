@@ -8,6 +8,7 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/actions';
 
+
 const LoginScreen = ({ navigation }: any) => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
@@ -27,7 +28,6 @@ const LoginScreen = ({ navigation }: any) => {
         const payload = {
             phone, password
         }
-        console.log('payload', payload)
         dispatch(login(payload))
     }
 

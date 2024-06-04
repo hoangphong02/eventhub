@@ -2,11 +2,10 @@ import { AuthState, AuthActionType } from './type';
 
 const initialState: AuthState = {
     auth: {
-        id: '',
-        name: '',
-        avatar: '',
-        email: '',
-        username: ''
+        access_token: '',
+        expires_in: 0,
+        refresh_token: '',
+        token_type: '',
     },
     isLoading: false,
     error: '',
@@ -27,12 +26,6 @@ export const authReducer = (
         case AuthActionType.LOGIN_FAILURE:
             return { ...state, isLoading: false, error: action.payload };
 
-        case AuthActionType.GET_PROFILE_REQUEST:
-            return { ...state, isLoading: true };
-        case AuthActionType.GET_PROFILE_SUCCESS:
-            return { ...state, isLoading: false, auth: action.payload };
-        case AuthActionType.GET_PROFILE_FAILURE:
-            return { ...state, isLoading: false, error: action.payload };
         default:
             return state;
     }

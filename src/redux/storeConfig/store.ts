@@ -5,13 +5,11 @@ import {
   compose,
   Store,
 } from 'redux';
-import { productReducer } from '../product/reducer';
-import { voucherReducer } from '../voucher/reducer';
 import createSagaMiddleware from 'redux-saga';
 import { ProductState } from '../product/type';
 import { VoucherState } from '../voucher/type';
 import { AuthState } from '../auth/type';
-
+import { UserState } from '../user/type';
 import rootSaga from '../rootSaga';
 import rootReducer from '../rootReducer';
 
@@ -19,7 +17,8 @@ export interface IApplicationState {
   [x: string]: any;
   productReducer: ProductState;
   voucherReducer: VoucherState;
-  AuthState: AuthState
+  authReducer: AuthState;
+  userReducer: UserState
 }
 
 // const rootReducer = combineReducers<IApplicationState>({
